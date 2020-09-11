@@ -5,8 +5,8 @@ import * as React from 'react';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
-import TabOneScreen from '../screens/TabOneScreen';
-import TabTwoScreen from '../screens/TabTwoScreen';
+import CameraScanner from '../screens/CameraScanner/CameraScanner';
+import ExternalScanner from '../screens/ExternalScanner/ExternalScanner';
 import { BottomTabParamList, TabOneParamList, TabTwoParamList } from '../types';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
@@ -15,57 +15,53 @@ export default function BottomTabNavigator() {
     const colorScheme = useColorScheme();
 
     return (
-        <BottomTab.Navigator initialRouteName="TabOne" tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}>
+        <BottomTab.Navigator initialRouteName="Camera" tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}>
             <BottomTab.Screen
-                name="Camera Scanner"
-                component={TabOneNavigator}
+                name="Camera"
+                component={CameraScannerScreen}
                 options={{
-                    tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />
+                    tabBarIcon: ({ color }) => <TabBarIcon name="ios-camera" color={color} />
                 }}
             />
             <BottomTab.Screen
-                name="External Scanner"
-                component={TabTwoNavigator}
+                name="ScanGun"
+                component={ScanGunScreen}
                 options={{
-                    tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />
+                    tabBarIcon: ({ color }) => <TabBarIcon name="ios-barcode" color={color} />
                 }}
             />
         </BottomTab.Navigator>
     );
 }
 
-// You can explore the built-in icon families and icons on the web at:
-// https://icons.expo.fyi/
 function TabBarIcon(props: { name: string; color: string }) {
     return <Ionicons size={30} style={{ marginBottom: -3 }} {...props} />;
 }
 
-// Each tab has its own navigation stack, you can read more about this pattern here:
-// https://reactnavigation.org/docs/tab-based-navigation#a-stack-navigator-for-each-tab
-const TabOneStack = createStackNavigator<TabOneParamList>();
+const CameraScannerStack = createStackNavigator<TabOneParamList>();
 
-function TabOneNavigator() {
+function CameraScannerScreen() {
     return (
-        <TabOneStack.Navigator>
-            <TabOneStack.Screen
-                name="TabOneScreen"
-                component={TabOneScreen}
+        <CameraScannerStack.Navigator>
+            <CameraScannerStack.Screen
+                name="CameraScannerScreen"
+                component={CameraScanner}
                 options={{ headerTitle: 'Camera Scanner' }}
             />
-        </TabOneStack.Navigator>
+        </CameraScannerStack.Navigator>
     );
 }
 
-const TabTwoStack = createStackNavigator<TabTwoParamList>();
+const ScanGunStack = createStackNavigator<TabTwoParamList>();
 
-function TabTwoNavigator() {
+function ScanGunScreen() {
     return (
-        <TabTwoStack.Navigator>
-            <TabTwoStack.Screen
-                name="TabTwoScreen"
-                component={TabTwoScreen}
-                options={{ headerTitle: 'External Scanner' }}
+        <ScanGunStack.Navigator>
+            <ScanGunStack.Screen
+                name="ScanGunScreen"
+                component={ExternalScanner}
+                options={{ headerTitle: 'Scan Gun' }}
             />
-        </TabTwoStack.Navigator>
+        </ScanGunStack.Navigator>
     );
 }

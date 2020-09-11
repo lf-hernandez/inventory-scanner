@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { FunctionComponent, useEffect } from 'react';
 import { Keyboard, TextInput, StyleSheet } from 'react-native';
 
-export default function TabTwoScreen() {
+const ExternalScanner: FunctionComponent = () => {
     const [value, onChangeText] = React.useState(' Scanned Code...');
 
     return <TextInput style={styles.input} placeholder="Scanned code goes here ..." clearButtonMode="always" />;
-}
+};
 
 const styles = StyleSheet.create({
     input: {
@@ -15,3 +15,5 @@ const styles = StyleSheet.create({
         borderRadius: 4
     }
 });
+
+export default ExternalScanner;
