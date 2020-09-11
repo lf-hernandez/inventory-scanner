@@ -12,12 +12,12 @@ const CameraScanner: FunctionComponent = () => {
     const [hasPermission, setHasPermission] = useState<boolean | null>(null);
     const [scanned, setScanned] = useState(false);
 
-  useEffect(() => {
-      (async () => {
-          const { status } = await BarCodeScanner.requestPermissionsAsync();
-          setHasPermission(status === 'granted');
-      })();
-  }, []);
+    useEffect(() => {
+        (async () => {
+            const { status } = await BarCodeScanner.requestPermissionsAsync();
+            setHasPermission(status === 'granted');
+        })();
+    }, []);
 
     const handleScan = ({ type, data }: BarCode) => {
         setScanned(true);

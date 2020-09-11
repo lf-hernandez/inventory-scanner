@@ -15,7 +15,10 @@ export default function BottomTabNavigator() {
     const colorScheme = useColorScheme();
 
     return (
-        <BottomTab.Navigator initialRouteName="Camera" tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}>
+        <BottomTab.Navigator
+            initialRouteName="Camera"
+            tabBarOptions={{ activeTintColor: Colors[colorScheme].tint, showLabel: false }}
+        >
             <BottomTab.Screen
                 name="Camera"
                 component={CameraScannerScreen}
