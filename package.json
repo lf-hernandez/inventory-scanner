@@ -8,7 +8,7 @@
         "eject": "expo eject",
         "test": "jest --watchAll",
         "lint:fix": "eslint . --fix",
-        "format": "prettier --write \"**/*.+(js|json|tsx|ts|md)\""
+        "format": "prettier --write \"**/*.+(js|tsx|ts)\""
     },
     "jest": {
         "preset": "jest-expo"
