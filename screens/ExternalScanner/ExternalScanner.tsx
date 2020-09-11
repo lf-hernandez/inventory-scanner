@@ -1,18 +1,40 @@
 import React, { FunctionComponent, useEffect } from 'react';
-import { Keyboard, TextInput, StyleSheet } from 'react-native';
+import { Keyboard, TextInput, StyleSheet, View, Text } from 'react-native';
 
 const ExternalScanner: FunctionComponent = () => {
     const [value, onChangeText] = React.useState(' Scanned Code...');
 
-    return <TextInput style={styles.input} placeholder="Scanned code goes here ..." clearButtonMode="always" />;
+    return (
+        <View style={styles.container}>
+            <Text style={styles.formLabel}>Scan Item</Text>
+            <View>
+                <TextInput style={styles.formInput} placeholder="Barcode" clearButtonMode="always" />
+                <TextInput style={styles.formInput} placeholder="Quantity" />
+            </View>
+        </View>
+    );
 };
 
 const styles = StyleSheet.create({
-    input: {
-        margin: 60,
-        padding: 10,
-        borderWidth: 0.5,
-        borderRadius: 4
+    container: {
+        flex: 1,
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        marginTop: 50
+    },
+
+    formLabel: {
+        fontSize: 20,
+        color: '#fff',
+        alignSelf: 'flex-start',
+        marginLeft: 25
+    },
+    formInput: {
+        marginTop: 20,
+        width: 300,
+        height: 40,
+        paddingHorizontal: 10,
+        borderRadius: 50
     }
 });
 
