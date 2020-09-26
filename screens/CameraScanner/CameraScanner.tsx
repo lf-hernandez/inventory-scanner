@@ -1,7 +1,6 @@
 import React, { FunctionComponent, useState, useEffect } from 'react';
-import { Text, View, StyleSheet, Button, Keyboard, TextInput } from 'react-native';
+import { Text, View, StyleSheet, Button } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
-import { transform } from '@babel/core';
 
 interface BarCode {
     type: string;
@@ -28,7 +27,7 @@ const CameraScanner: FunctionComponent = () => {
         return <Text>Requesting camera permission</Text>;
     }
 
-    if (hasPermission === false) {
+    if (!hasPermission) {
         return <Text>No access to camera</Text>;
     }
 

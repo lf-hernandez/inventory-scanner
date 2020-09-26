@@ -1,15 +1,30 @@
 import React, { FunctionComponent, useEffect } from 'react';
-import { Keyboard, TextInput, StyleSheet, View, Text } from 'react-native';
+import { Button, TextInput, StyleSheet, View, Text } from 'react-native';
 
 const ExternalScanner: FunctionComponent = () => {
-    const [value, onChangeText] = React.useState(' Scanned Code...');
+    const [value, setValue] = React.useState(0);
+
+    const increment = () => setValue(value + 1);
+    const decrement = () => setValue(value - 1);
 
     return (
         <View style={styles.container}>
             <Text style={styles.formLabel}>Scan Item</Text>
             <View>
                 <TextInput style={styles.formInput} placeholder="Barcode" clearButtonMode="always" />
-                <TextInput style={styles.formInput} placeholder="Quantity" />
+                <div style={styles.picker}>
+                    <Button
+                        onPress={increment}
+                        title="+" />
+                    <TextInput
+                        style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+                        value={value.toString()}
+                    />
+                    <Button
+                        onPress={decrement}
+                        title="-"/>
+                </div>
+
             </View>
         </View>
     );
@@ -21,6 +36,11 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'center',
         marginTop: 50
+    },
+
+    picker: {
+      flex: 1,
+      flexDirection: 'row'
     },
 
     formLabel: {
