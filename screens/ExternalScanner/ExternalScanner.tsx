@@ -1,14 +1,22 @@
 import React, { FunctionComponent } from 'react';
-import { Button, TextInput, StyleSheet, View, Text } from 'react-native';
+import { Button, TextInput, StyleSheet, View, Modal } from 'react-native';
 
 const ExternalScanner: FunctionComponent = () => {
-    const [quantity, setQuantity] = React.useState(0);
+    const [quantity, setQuantity] = React.useState(1);
 
     const incrementQuantity = () => setQuantity(quantity + 1);
-    const decrementQuantity = () => setQuantity(quantity - 1);
+    const decrementQuantity = () => {
+        if(quantity > 1) {
+            setQuantity(quantity - 1)
+        }
+    };
+    const isDisabled = () => quantity <= 1;
 
     const quantityInputHandler = (value: string) => {
-        const parsedValue = parseInt(value);
+        let parsedValue = parseInt(value);
+        if(isNaN(parsedValue)) {
+            parsedValue = 1;
+        }
         setQuantity(parsedValue);
     };
 
@@ -33,6 +41,7 @@ const ExternalScanner: FunctionComponent = () => {
                 <Button
                     onPress={incrementQuantity}
                     title="+"
+                    disabled={isDisabled()}
                 />
             </View>
         </View>
