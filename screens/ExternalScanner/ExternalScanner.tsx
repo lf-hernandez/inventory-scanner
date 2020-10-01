@@ -10,7 +10,7 @@ const ExternalScanner: FunctionComponent = () => {
     const quantityInputHandler = (value: string) => {
         const parsedValue = parseInt(value);
         setQuantity(parsedValue);
-    }
+    };
 
     return (
         <View style={styles.container}>
@@ -20,22 +20,20 @@ const ExternalScanner: FunctionComponent = () => {
 
             <View style={styles.quantitySelector}>
                 <Button
-                    onPress={incrementQuantity}
-                    title="+"
+                    onPress={decrementQuantity}
+                    title="-"
                     color="cyan"
                 />
-
                 <TextInput
                     style={styles.quantityInput}
                     onChangeText={quantityInputHandler}
                     value={quantity.toString()}
                 />
                 <Button
-                    onPress={decrementQuantity}
-                    title="-"
+                    onPress={incrementQuantity}
+                    title="+"
                     color="cyan"
                 />
-
             </View>
         </View>
     );
