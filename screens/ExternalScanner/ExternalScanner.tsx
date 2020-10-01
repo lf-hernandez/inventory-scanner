@@ -22,17 +22,17 @@ const ExternalScanner: FunctionComponent = () => {
                 <Button
                     onPress={decrementQuantity}
                     title="-"
-                    color="cyan"
                 />
                 <TextInput
                     style={styles.quantityInput}
                     onChangeText={quantityInputHandler}
                     value={quantity.toString()}
+                    keyboardType="number-pad"
+                    maxLength={4}
                 />
                 <Button
                     onPress={incrementQuantity}
                     title="+"
-                    color="cyan"
                 />
             </View>
         </View>
@@ -52,19 +52,16 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 50
     },
-    quantitySelectorButton: {
-        borderColor: 'cyan'
-    },
     barcodeInput: {
         width: 200,
         padding: 10,
-        borderBottomColor: 'cyan',
+        borderBottomColor: '#9E9E9E',
         borderBottomWidth: 1
     },
     quantityInput: {
         width: 50,
         padding: 10,
-        borderBottomColor: 'cyan',
+        borderBottomColor: '#9E9E9E',
         borderBottomWidth: 1,
         textAlign: 'center'
     }
