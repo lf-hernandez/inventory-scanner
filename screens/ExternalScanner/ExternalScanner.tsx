@@ -1,29 +1,40 @@
-import React, { FunctionComponent, useEffect } from 'react';
+import React, { FunctionComponent } from 'react';
 import { Button, TextInput, StyleSheet, View, Text } from 'react-native';
 
 const ExternalScanner: FunctionComponent = () => {
-    const [value, setValue] = React.useState(0);
+    const [quantity, setQuantity] = React.useState(0);
 
-    const increment = () => setValue(value + 1);
-    const decrement = () => setValue(value - 1);
+    const incrementQuantity = () => setQuantity(quantity + 1);
+    const decrementQuantity = () => setQuantity(quantity - 1);
+
+    const quantityInputHandler = (value: string) => {
+        const parsedValue = parseInt(value);
+        setQuantity(parsedValue);
+    }
 
     return (
         <View style={styles.container}>
-            <Text style={styles.formLabel}>Scan Item</Text>
             <View>
-                <TextInput style={styles.formInput} placeholder="Barcode" clearButtonMode="always" />
-                <div style={styles.picker}>
-                    <Button
-                        onPress={increment}
-                        title="+" />
-                    <TextInput
-                        style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-                        value={value.toString()}
-                    />
-                    <Button
-                        onPress={decrement}
-                        title="-"/>
-                </div>
+                <TextInput style={styles.barcodeInput} placeholder="Barcode" clearButtonMode="always" />
+            </View>
+
+            <View style={styles.quantitySelector}>
+                <Button
+                    onPress={incrementQuantity}
+                    title="+"
+                    color="cyan"
+                />
+
+                <TextInput
+                    style={styles.quantityInput}
+                    onChangeText={quantityInputHandler}
+                    value={quantity.toString()}
+                />
+                <Button
+                    onPress={decrementQuantity}
+                    title="-"
+                    color="cyan"
+                />
 
             </View>
         </View>
@@ -37,24 +48,27 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: 50
     },
-
-    picker: {
-      flex: 1,
-      flexDirection: 'row'
+    quantitySelector: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginTop: 50
     },
-
-    formLabel: {
-        fontSize: 20,
-        color: '#fff',
-        alignSelf: 'flex-start',
-        marginLeft: 25
+    quantitySelectorButton: {
+        borderColor: 'cyan'
     },
-    formInput: {
-        marginTop: 20,
-        width: 300,
-        height: 40,
-        paddingHorizontal: 10,
-        borderRadius: 50
+    barcodeInput: {
+        width: 200,
+        padding: 10,
+        borderBottomColor: 'cyan',
+        borderBottomWidth: 1
+    },
+    quantityInput: {
+        width: 50,
+        padding: 10,
+        borderBottomColor: 'cyan',
+        borderBottomWidth: 1,
+        textAlign: 'center'
     }
 });
 
