@@ -11,6 +11,9 @@ const ExternalScanner: FunctionComponent = () => {
     const [itemName, setItemName] = useState('');
     const [itemDescription, setItemDescription] = useState('');
     const [selectedImage, setSelectedImage] = useState(null);
+    const [price, setPrice] = useState('');
+    const [total, setTotal] = useState('');
+    const [min, setMin] = useState('');
 
     const barcodeHandler = () => {
         setModalVisible(true);
@@ -22,9 +25,16 @@ const ExternalScanner: FunctionComponent = () => {
                 isModalVisible={isModalVisible}
                 itemName={itemName}
                 itemDescription={itemDescription}
+                price={price}
+                total={total}
+                min={min}
+                quantity={quantity}
                 setModalVisible={setModalVisible}
                 setItemDescription={setItemDescription}
                 setItemName={setItemName}
+                setPrice={setPrice}
+                setTotal={setTotal}
+                setMin={setMin}
             />
             <BarcodeInput
                 barcode={barcode}

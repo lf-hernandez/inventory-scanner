@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { StyleSheet, Button, Modal, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Camera } from 'expo-camera';
 
 type NewItemModalProps = {
     isModalVisible: boolean;
@@ -8,13 +9,51 @@ type NewItemModalProps = {
     setItemName: (itemName: string) => void;
     itemDescription: string;
     setItemDescription: (itemDescription: string) => void;
+    price: number;
+    setPrice: (price: number) => void;
+    total: number;
+    setTotal: (price: number) => void;
+    min: number;
+    setMin: (min: number) => void;
 }
 
 export default function NewItemModal(props: NewItemModalProps) {
+    const parseNumber = (value: string) => {
+        let parsedValue = parseInt(value);
+
+        if (isNaN(parsedValue) || parsedValue < 0) {
+            parsedValue = 0;
+        }
+        
+        return parsedValue;
+    };
+
     const itemNameInputHandler = (value: string) => props.setItemName(value);
     const itemDescriptionHandler = (value: string) => props.setItemDescription(value);
+    const itemPriceHandler = (value: string) => props.setPrice(parseNumber(value));
+    const totalHandler = (value: string) => props.setTotal(parseNumber(value));
+    const minHandler = (value: string) => props.setMin(parseNumber(value));
+
+
     const cancelSubmission = () => props.setModalVisible(false);
     const submitNewItem = () => console.log('submission');
+
+    const [hasPermission, setHasPermission] = useState(null);
+    const [type, setType] = useState(Camera.Constants.Type.back);
+
+    useEffect(() => {
+        (async () => {
+        const { status } = await Camera.requestPermissionsAsync();
+        setHasPermission(status === 'granted');
+        })();
+    }, []);
+
+    if (hasPermission === null) {
+        return <View />;
+    }
+    if (hasPermission === false) {
+        return <Text>No access to camera</Text>;
+    }
 
     return (
         <Modal
@@ -24,6 +63,7 @@ export default function NewItemModal(props: NewItemModalProps) {
             <View style={styles.modalContainer}>
                 <View style={styles.modalView}>
                     <Text style={styles.heading}>Add New Inventory Item</Text>
+                    
                     <TextInput
                         style={styles.input}
                         onChangeText={itemNameInputHandler}
@@ -40,9 +80,27 @@ export default function NewItemModal(props: NewItemModalProps) {
                         placeholderTextColor="black">
                     </TextInput>
 
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={styles.buttonText}>Upload item photo</Text>
-                    </TouchableOpacity>
+                    <TextInput
+                        style={styles.input}
+                        onChangeText={itemPriceHandler}
+                        value={props.price.toString()}
+                        placeholder="Price"
+                        placeholderTextColor="black"></TextInput>   
+                    
+                    <TextInput
+                        style={styles.input}
+                        onChangeText={totalHandler}
+                        value={props.total.toString()}
+                        placeholder="Total value"
+                        placeholderTextColor="black"></TextInput>   
+
+                    <TextInput
+                        style={styles.input}
+                        onChangeText={minHandler}
+                        value={props.min.toString()}
+                        placeholder="Min"
+                        placeholderTextColor="black"></TextInput>   
+
 
                     <View style={styles.actionsContainer}>
                         <Button
@@ -51,7 +109,7 @@ export default function NewItemModal(props: NewItemModalProps) {
                         />
                         <Button
                             onPress={cancelSubmission}
-                            title="Submit"
+                            title="Save"
                         />
                     </View>
                 </View>
