@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState } from 'react';
-import { StyleSheet, View} from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import QuantitySelector from '../../components/QuantitySelector';
 import BarcodeInput from '../../components/BarcodeInput';
 import NewItemModal from '../../components/NewItemModal';
@@ -11,9 +11,9 @@ const ExternalScanner: FunctionComponent = () => {
     const [itemName, setItemName] = useState('');
     const [itemDescription, setItemDescription] = useState('');
     const [selectedImage, setSelectedImage] = useState(null);
-    const [price, setPrice] = useState('');
-    const [total, setTotal] = useState('');
-    const [min, setMin] = useState('');
+    const [price, setPrice] = useState(0);
+    const [total, setTotal] = useState(0);
+    const [min, setMin] = useState(0);
 
     const barcodeHandler = () => {
         setModalVisible(true);
@@ -25,9 +25,6 @@ const ExternalScanner: FunctionComponent = () => {
                 isModalVisible={isModalVisible}
                 itemName={itemName}
                 itemDescription={itemDescription}
-                price={price}
-                total={total}
-                min={min}
                 quantity={quantity}
                 setModalVisible={setModalVisible}
                 setItemDescription={setItemDescription}
@@ -36,14 +33,8 @@ const ExternalScanner: FunctionComponent = () => {
                 setTotal={setTotal}
                 setMin={setMin}
             />
-            <BarcodeInput
-                barcode={barcode}
-                setBarcode={setBarcode}
-                barcodeHandler={barcodeHandler}/>
-            <QuantitySelector
-                quantity={quantity}
-                setQuantity={setQuantity}
-            />
+            <BarcodeInput barcode={barcode} setBarcode={setBarcode} barcodeHandler={barcodeHandler} />
+            <QuantitySelector quantity={quantity} setQuantity={setQuantity} />
         </View>
     );
 };
@@ -53,8 +44,8 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-start',
         alignItems: 'center',
-        marginTop: 50
-    }
+        marginTop: 50,
+    },
 });
 
 export default ExternalScanner;
