@@ -3,29 +3,41 @@ import { Button, TextInput, View, StyleSheet, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 type QuantitySelectorProps = {
-    quantity: number;
-    setQuantity: (quantity: number) => void;
+    quantity: any;
+    setQuantity: (quantity: any) => void;
 };
 
 export default function QuantitySelector(props: QuantitySelectorProps) {
-    const isDecButtonDisabled = () => props.quantity <= 1;
-    const incrementQuantity = () => props.setQuantity(props.quantity + 1);
+    const isDecButtonDisabled = props.quantity < 1;
+    const incrementQuantity = () => {
+        if (props.quantity === '') {
+            props.setQuantity(1);
+            return;
+        }
+        props.setQuantity(props.quantity + 1);
+    };
     const decrementQuantity = () => {
         if (props.quantity > 1) {
             props.setQuantity(props.quantity - 1);
         }
     };
     const quantityInputHandler = (value: string) => {
+        if (value === '') {
+            props.setQuantity('');
+            return;
+        }
         let parsedValue = parseInt(value);
+
         if (isNaN(parsedValue)) {
             parsedValue = 1;
         }
+
         props.setQuantity(parsedValue);
     };
 
     return (
         <View style={styles.quantitySelector}>
-            <TouchableOpacity onPress={decrementQuantity} style={styles.button}>
+            <TouchableOpacity disabled={isDecButtonDisabled} onPress={decrementQuantity} style={styles.button}>
                 <Text style={styles.buttonLabel}>-</Text>
             </TouchableOpacity>
             <TextInput
@@ -35,7 +47,7 @@ export default function QuantitySelector(props: QuantitySelectorProps) {
                 keyboardType="number-pad"
                 maxLength={4}
             />
-            <TouchableOpacity onPress={incrementQuantity} disabled={isDecButtonDisabled()} style={styles.button}>
+            <TouchableOpacity onPress={incrementQuantity} style={styles.button}>
                 <Text style={styles.buttonLabel}>+</Text>
             </TouchableOpacity>
         </View>

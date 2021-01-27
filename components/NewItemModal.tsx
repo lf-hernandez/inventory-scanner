@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Modal, Text, TextInput, View } from 'react-native';
-import { Button } from 'react-native-elements';
+import { StyleSheet, Modal, Text, TextInput, View, Button } from 'react-native';
+
 import { Camera } from 'expo-camera';
 
 type NewItemModalProps = {
@@ -53,7 +53,17 @@ export default function NewItemModal({
         setMin(parseNumber(value));
     };
 
-    const cancelSubmission = () => setModalVisible(false);
+    const cancelSubmission = () => {
+        setModalVisible(false);
+        setItemName('');
+        setItemDescription('');
+        setPrice(0);
+        setPriceFormField('');
+        setMin(0);
+        setMinFormField('');
+        setTotal(0);
+        setTotalFormField('');
+    };
     const submitNewItem = () => console.log('submission');
 
     const [hasPermission, setHasPermission] = useState(false);
@@ -65,13 +75,14 @@ export default function NewItemModal({
             setHasPermission(status === 'granted');
         })();
     }, []);
-
     useEffect(() => {
         const parsedPrice = parseNumber(priceFormField);
         if (parsedPrice > 0) {
             const computedTotal = parsedPrice * quantity;
             setTotal(computedTotal);
             setTotalFormField(`${computedTotal.toString()}`);
+        } else {
+            setTotalFormField('');
         }
     }, [priceFormField]);
 
