@@ -8,17 +8,22 @@ export default {
                 screens: {
                     TabOne: {
                         screens: {
-                            TabOneScreen: 'one'
-                        }
+                            TabOneScreen: 'one',
+                        },
                     },
                     TabTwo: {
                         screens: {
-                            TabTwoScreen: 'two'
-                        }
-                    }
-                }
+                            TabTwoScreen: 'two',
+                        },
+                    },
+                    TabThree: {
+                        screen: {
+                            TabThreeScreen: 'Search',
+                        },
+                    },
+                },
             },
-            NotFound: '*'
-        }
-    }
+            NotFound: '*',
+        },
+    },
 };

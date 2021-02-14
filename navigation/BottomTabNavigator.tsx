@@ -7,33 +7,41 @@ import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import CameraScanner from '../screens/CameraScanner/CameraScanner';
 import ExternalScanner from '../screens/ExternalScanner/ExternalScanner';
-import { BottomTabParamList, TabOneParamList, TabTwoParamList } from '../types';
+import Search from '../screens/Search/Search';
+import { BottomTabParamList, TabOneParamList, TabTwoParamList, TabThreeParamList } from '../types';
 
-const BottomTab = createBottomTabNavigator<BottomTabParamList>();
+const { Navigator, Screen } = createBottomTabNavigator<BottomTabParamList>();
 
 export default function BottomTabNavigator() {
     const colorScheme = useColorScheme();
 
     return (
-        <BottomTab.Navigator
-            initialRouteName="Camera"
+        <Navigator
+            initialRouteName="ScanGun"
             tabBarOptions={{ activeTintColor: Colors[colorScheme].tint, showLabel: false }}
         >
-            <BottomTab.Screen
+            <Screen
                 name="Camera"
                 component={CameraScannerScreen}
                 options={{
-                    tabBarIcon: ({ color }) => <TabBarIcon name="ios-camera" color={color} />
+                    tabBarIcon: ({ color }) => <TabBarIcon name="ios-camera" color={color} />,
                 }}
             />
-            <BottomTab.Screen
+            <Screen
                 name="ScanGun"
                 component={ScanGunScreen}
                 options={{
-                    tabBarIcon: ({ color }) => <TabBarIcon name="ios-barcode" color={color} />
+                    tabBarIcon: ({ color }) => <TabBarIcon name="ios-barcode" color={color} />,
                 }}
             />
-        </BottomTab.Navigator>
+            <Screen
+                name="Search"
+                component={SearchScreen}
+                options={{
+                    tabBarIcon: ({ color }) => <TabBarIcon name="ios-search" color={color} />,
+                }}
+            />
+        </Navigator>
     );
 }
 
@@ -68,3 +76,17 @@ function ScanGunScreen() {
         </ScanGunStack.Navigator>
     );
 }
+
+const SearchStack = createStackNavigator<TabThreeParamList>();
+
+function SearchScreen() {
+    return (
+        <SearchStack.Navigator>
+            <SearchStack.Screen name="SearchScreen" component={Search} options={{ headerTitle: 'Search' }} />
+        </SearchStack.Navigator>
+    );
+}
+
+//NEW SEARCH STACK NAVIGATOR
+//SEARCH SCREENS (2X SCREEN --- SEARCH SCREEN /// SEARCH RESULT SCREEN)
+//ADD SEARCH TO BOTTOM TAB NAVIGATION

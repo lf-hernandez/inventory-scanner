@@ -1,0 +1,19 @@
+{
+    "products": [
+        { "itemId": 1, "itemName": "Natrol Biotin Full Strength 10,000mcg 100 tablets", "quantity": 100 },
+
+        { "itemId": 2, "itemName": "Hairtamin Full Strength", "quantity": 40 },
+        { "itemId": 3, "itemName": "Puritan's Pride Hair Shampoo", "quantity": 1001 },
+
+        { "itemId": 4, "itemName": "Kirkland Minoxidil 5% Hair regrowth", "quantity": 110 },
+        { "itemId": 5, "itemName": "Natrol Vitamin c", "quantity": 12 },
+
+        { "itemId": 6, "itemName": "Puritan's Pride Vitamin c", "quantity": 14 },
+        { "itemId": 7, "itemName": "Ethika Boxers", "quantity": 5 },
+
+        { "itemId": 8, "itemName": "Supreme Toothpaste", "quantity": 10 },
+        { "itemId": 9, "itemName": "Kirkland foam minoxidil 5%", "quantity": 30 },
+
+        { "itemId": 10, "itemName": "Rogaine", "quantity": 20 }
+    ]
+}

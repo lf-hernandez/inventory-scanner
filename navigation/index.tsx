@@ -8,6 +8,8 @@ import { RootStackParamList } from '../types';
 import BottomTabNavigator from './BottomTabNavigator';
 import LinkingConfiguration from './LinkingConfiguration';
 
+import SearchResult from '../screens/Search/SearchResult';
+import IndividualItemResult from '../screens/Search/IndividualItemResult';
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
     return (
         <NavigationContainer linking={LinkingConfiguration} theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
@@ -22,6 +24,8 @@ function RootNavigator() {
     return (
         <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name="Root" component={BottomTabNavigator} />
+            <Stack.Screen name="SearchResult" component={SearchResult} />
+            <Stack.Screen name="ItemDetails" component={IndividualItemResult} />
             <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
         </Stack.Navigator>
     );
