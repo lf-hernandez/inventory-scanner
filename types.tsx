@@ -6,6 +6,7 @@ export type RootStackParamList = {
 export type BottomTabParamList = {
     Camera: string;
     ScanGun: string;
+    Search: string;
 };
 
 export type TabOneParamList = {
@@ -14,4 +15,8 @@ export type TabOneParamList = {
 
 export type TabTwoParamList = {
     ScanGunScreen: undefined;
+};
+
+export type TabThreeParamList = {
+    SearchScreen: undefined;
 };
